@@ -2,7 +2,7 @@
 package main
 
 import (
-	"github.com/andoshin11/go-web-app/src/controller"
+	"github.com/Silver-birder/book-store-go/src/controller"
 	"github.com/gin-gonic/gin"
 )
 
