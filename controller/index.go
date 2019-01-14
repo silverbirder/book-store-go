@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// IndexGET displays application index page
-func IndexGET(c *gin.Context) {
-	c.String(http.StatusOK, "Hello, world!")
+
+func IndexSave(c *gin.Context) {
+	c.HTML(http.StatusOK, "index.tmpl", gin.H{})
 }

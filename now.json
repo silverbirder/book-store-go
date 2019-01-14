@@ -1,6 +1,6 @@
 {
-    "name":  "togetter-to-text",
-    "alias": "togetter-to-text.now.sh",
+    "name":  "book-store-go",
+    "alias": "book-store-go.sh",
     "env": {},
     "type": "docker",
     "features": {
