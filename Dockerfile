@@ -5,4 +5,4 @@ COPY . .
 RUN go-wrapper download
 RUN go-wrapper install
 EXPOSE 3000
-#ENTRYPOINT ["go-wrapper", "run"]
+ENTRYPOINT ["go-wrapper", "run"]
