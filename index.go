@@ -8,9 +8,6 @@ import (
 
 func main() {
 	router := gin.Default()
-	router.LoadHTMLGlob("templates/*")
-	router.Static("/css/", "./public/css")
-	router.Static("/js/", "./public/js/")
 	router.GET("/api/book/0.1/add", controller.AddBook)
 	router.Run(":3000")
 }
