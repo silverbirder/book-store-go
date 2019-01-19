@@ -1,7 +1,13 @@
 {
     "name":  "book-store-go",
     "alias": "book-store-go.sh",
-    "env": {},
+    "build": {
+        "env": {
+            "ALGOLIA_INDEX_KEY": "@index_key",
+            "ALGOLIA_APP_KEY": "@app_key",
+            "ALGOLIA_ADMIN_KEY": "@admin_key"
+        }
+    },
     "type": "docker",
     "features": {
       "cloud": "v1"
