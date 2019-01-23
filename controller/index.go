@@ -122,7 +122,17 @@ type OpenBd struct {
 		Author    string `json:"author"`
 	} `json:"summary"`
 }
-
+type Algolia struct {
+	Author string `json:"author"`
+	Isbn string `json:"isbn"`
+	Publisher string `json:"publisher"`
+	Title string `json:"title"`
+	Cover string `json:"cover"`
+	Pubdate string `json:"pubdate"`
+	Series string `json:"series"`
+	Volume string `json:"volume"`
+	ObjectId string `json:"objectId"`
+}
 var client = algoliasearch.NewClient(ALGOLIA_APP_KEY, ALGOLIA_ADMIN_KEY)
 var index = client.InitIndex(ALGOLIA_INDEX_KEY)
 
@@ -166,6 +176,29 @@ func AddBook(c *gin.Context) {
 		"textContent": textContent,
 	}
 	_, err = index.AddObject(object)
+	if err != nil {
+		log.Fatalf("Error!: %v", err)
+		c.JSON(http.StatusOK, gin.H{"status": "fail"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"status": "ok"})
+}
+
+func UpdateBook(c *gin.Context) {
+	var algolia Algolia
+	c.BindJSON(&algolia)
+	object := algoliasearch.Object{
+		"isbn":  algolia.Isbn,
+		"title":  algolia.Title,
+		"volume":  algolia.Volume,
+		"series":  algolia.Series,
+		"publisher":  algolia.Publisher,
+		"pubdate":  algolia.Pubdate,
+		"cover":  algolia.Cover,
+		"author":  algolia.Author,
+		"objectID": algolia.ObjectId,
+	}
+	_, err := index.PartialUpdateObject(object)
 	if err != nil {
 		log.Fatalf("Error!: %v", err)
 		c.JSON(http.StatusOK, gin.H{"status": "fail"})

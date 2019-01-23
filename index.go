@@ -16,5 +16,6 @@ func main() {
 		ExposeHeaders:    []string{"Content-Length"},
 	}))
 	router.GET("/api/book/0.1/add", controller.AddBook)
+	router.POST("/api/book/0.1/update", controller.UpdateBook)
 	router.Run(":3000")
 }
