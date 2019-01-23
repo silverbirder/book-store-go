@@ -154,9 +154,6 @@ func AddBook(c *gin.Context) {
 	textContent := openBd[0].Onix.CollateralDetail.TextContent
 	summary := openBd[0].Summary
 	cover := summary.Cover
-	if cover == "" {
-		cover = NO_IMAGE_URL
-	}
 	object := algoliasearch.Object{
 		"isbn":  summary.Isbn,
 		"title":  summary.Title,
