@@ -15,7 +15,7 @@ var ALGOLIA_APP_KEY = os.Getenv("ALGOLIA_APP_KEY")
 var ALGOLIA_ADMIN_KEY = os.Getenv("ALGOLIA_ADMIN_KEY")
 var ALGOLIA_INDEX_KEY = os.Getenv("ALGOLIA_INDEX_KEY")
 var OPEN_BD_URL = "https://api.openbd.jp/v1/get"
-
+var NO_IMAGE_URL = "https://res.cloudinary.com/silverbirder/image/upload/v1548200876/no-image.png"
 
 // https://api.openbd.jp/v1/get?isbn=9784621086025
 // https://mholt.github.io/json-to-go/
@@ -153,6 +153,10 @@ func AddBook(c *gin.Context) {
 	}
 	textContent := openBd[0].Onix.CollateralDetail.TextContent
 	summary := openBd[0].Summary
+	cover := summary.Cover
+	if cover == "" {
+		cover = NO_IMAGE_URL
+	}
 	object := algoliasearch.Object{
 		"isbn":  summary.Isbn,
 		"title":  summary.Title,
@@ -160,7 +164,7 @@ func AddBook(c *gin.Context) {
 		"series":  summary.Series,
 		"publisher":  summary.Publisher,
 		"pubdate":  summary.Pubdate,
-		"cover":  summary.Cover,
+		"cover":  cover,
 		"author":  summary.Author,
 		"textContent": textContent,
 	}
